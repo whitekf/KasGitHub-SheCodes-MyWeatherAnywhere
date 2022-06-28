@@ -69,7 +69,6 @@
             <br />
 
             <div col="2">
-              <button class="currentButton">Current Location</button>
             </div>
           </div>
         </div>
@@ -77,12 +76,20 @@
         <!-- -->
 
         <div class="row">
-          <div class="col-12">
+          <div class="col-1"></div>
+          <div class="col-2">
             <h3 class="today">
-              Today:
-              <button class="CorF">°C or °F</button>
-            </h3>
+                  Today:
+              </div>
+              <div class="col-4">
+                  <button class="CorF">°C or °F</button>
           </div>
+          <div class="col-1"></div>
+          <div class="col-3">
+              <button class="currentButton">Current Location</button>
+          </div>
+             </h3>
+          <div class="col-1"></div>
         </div>
 
         <!-- -->
@@ -90,22 +97,23 @@
 
         <!--   <KASSIE> -->
         <div class="row">
-          <div class="col-7 align-self-center">
+          <div class="col-6 align-self-center">
             <h3 class="current">
               <span>
                 <ul>
                   <li>
-                    Current:
+                    Current Temp:
                     <span class="currentTemp"> X </span
-                    ><span class="CorFLetter" size="100">F°</span>
+                    ><span class="CorFLetter" size="100">°F</span>
                   </li>
                   <li>
+                    Weather: 
                     <span class="currentDescription" size="100%">
                       Feels like XYZ....
                     </span>
                   </li>
                   <li>
-                    Humidity:
+                    Humid:
                     <span class="currentHumidity"> X </span>
                   </li>
                   <li>
@@ -114,7 +122,7 @@
                   </li>
                   <li>
                     <span class="highLow" size="100">
-                      Low/High: X°F / X°F
+                      Hi/Lo: X°F / X°F
                     </span>
                   </li>
                 </ul>
@@ -139,9 +147,10 @@
         <div class="row">
           <div class="col-1"></div>
           <div class="col-1 dayOfWeek">Tue</div>
-          <div class="col-7 otherDays align-self-center">
-            79 F / 82 F Sunny, Partly Cloudy
-            <div class="col-1"></div>
+          <div class="col-7">
+            <div class="otherDays align-self-center">
+              79 F / 82 F Sunny, Partly Cloudy
+            </div>
           </div>
           <div class="col-1 weatherIcon">
             <i class="fa-solid fa-cloud-sun align-self-center"></i>

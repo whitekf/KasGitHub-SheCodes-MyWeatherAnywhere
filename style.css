@@ -7,17 +7,18 @@ body {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  border-radius: 20px;
   background-color: #98a3e3;
   display: block;
   margin-left: 3%;
   margin-right: 3%;
-  margin-top: 5%;
+  margin-top: 1%;
   margin-bottom: 1%;
 }
 
 li {
   list-style: none;
+  text-align: left;
+  margin-left: 20px;
   font-family: "Consolas", "Courier New", monospace, Helvetica;
 }
 
@@ -149,13 +150,14 @@ button:hover {
   display: block;
   outline: none;
   background-color: #ffffff;
+  color: rgb(88, 69, 182);
   text-align: center;
   position: static;
   padding: 5px 5px 5px 5px;
-  border-radius: 40px;
-  margin-top: 5px;
+  border-radius: 20px;
   border: rgb(89, 106, 202);
-  margin-left: 65%;
+  margin-top: 5px;
+  margin-left: 5px;
   max-width: 100%;
 }
 
@@ -163,14 +165,15 @@ button:hover {
   display: block;
   outline: none;
   text-align: center;
+  color: #fff;
   position: static;
   padding: 5px 5px 5px 5px;
-  border-radius: 40px;
+  border-radius: 20px;
   background-color: #f4c948;
   border: 2px solid rgb(224, 126, 22);
   max-width: 100%;
   margin-top: 5px;
-  margin-left: 65%;
+  margin-left: 5px;
   cursor: pointer;
 }
 
@@ -178,6 +181,7 @@ input.inputButton {
   display: block;
   outline: none;
   background-color: #ffffff;
+  color: rgb(88, 69, 182);
   text-align: center;
   position: static;
   border-radius: 40px;
@@ -205,41 +209,40 @@ input.inputButton:hover {
   color: #fff;
   text-align: left;
   font-size: 26px;
-  margin-left: 60px;
-  margin-right: 40px;
+  margin-left: 10px;
   font-weight: bold;
+  margin-top: 15px;
 }
 
 button.CorF {
-  text-align: left;
+  text-align: center;
   background-color: #717fcd;
   padding: 5px 5px 5px 5px;
-  border-radius: 40px;
+  border-radius: 25px;
   font-size: 15px;
-  margin-left: 60px;
-  margin-right: 40px;
+  margin-left: 10px;
+  margin-right: 10px;
   margin-bottom: 5px;
-
+  color: rgb(88, 69, 182);
   display: block;
   outline: none;
   background-color: #ffffff;
   text-align: center;
   position: static;
-  border-radius: 40px;
   margin-top: 5px;
   border: rgb(89, 106, 202);
-  margin-left: 65%;
   max-width: 100%;
 }
 
 button.CorF:hover {
-  text-align: left;
+  text-align: center;
   background-color: #90d214;
+  color: #fff;
   border: 2px solid rgb(233, 255, 38);
-  border-radius: 40px;
+  border-radius: 25px;
   font-size: 15px;
-  margin-left: 60px;
-  margin-right: 40px;
+  margin-left: 10px;
+  margin-right: 10px;
   cursor: pointer;
   margin-bottom: 5px;
 
@@ -250,15 +253,13 @@ button.CorF:hover {
   background-color: #ff6bf3;
   text-align: center;
   position: static;
-  border-radius: 40px;
   margin-top: 5px;
-  margin-left: 65%;
   max-width: 100%;
 }
 
 .currentTemp {
   text-transform: capitalize;
-  font-size: 30px;
+  font-size: 28px;
   text-align: left;
   margin-bottom: 15px;
   padding-bottom: 20px;
@@ -275,18 +276,17 @@ button.CorF:hover {
 }
 
 .highLow {
-  text-align: right;
-  padding-left: 20%;
   position: relative;
   color: white;
   font-size: 18px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 .currentDescription {
   text-align: right;
   align-items: center;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
+  font-size: 18px;
   color: #fff;
   max-width: 100%;
 }
@@ -294,7 +294,8 @@ button.CorF:hover {
 span.currentHumidity {
   text-align: right;
   align-items: center;
-  padding-bottom: 20px;
+  font-size: 18px;
+  padding-bottom: 10px;
   color: #fff;
   max-width: 100%;
 }
@@ -302,7 +303,8 @@ span.currentHumidity {
 span.currentWind {
   text-align: right;
   align-items: center;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
+  font-size: 18px;
   color: #fff;
   max-width: 100%;
 }
@@ -317,12 +319,13 @@ h3.current {
   background-color: #e0b06b;
   background-color: #98a3e3;
   background-color: #6a84ed;
-  border-radius: 75px;
+  border-radius: 100px;
   border: 4px solid rgb(113, 129, 221);
   padding: 15px 15px 15px 15px;
   margin-left: 35px;
-
   margin-right: 5px;
+  margin-bottom: 15px;
+  margin-top: 10px;
   font-size: 20px;
 }
 
@@ -334,14 +337,13 @@ h3.current:hover {
   color: white;
   position: relative;
   background-color: #717fcd;
-  border-radius: 85px;
+  border-radius: 100px;
   border: 4px solid rgb(97, 90, 194);
   padding: 15px 15px 15px 15px;
   margin-left: 35px;
   margin-bottom: 13px;
   margin-right: 5px;
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 20px;
 }
 
 .weatherIconCurrent {
@@ -351,7 +353,7 @@ h3.current:hover {
   color: #ffffff;
   text-align: center;
   font-size: 38px;
-  padding: 20px 0px 20px 0px;
+  padding: 20px 20px 20px 20px;
   font-weight: bold;
 }
 
@@ -362,7 +364,7 @@ h3.current:hover {
   color: #fefa8d;
   text-align: center;
   font-size: 38px;
-  padding: 20px 5px 20px 5px;
+  padding: 20px 20px 20px 20px;
   font-weight: bold;
 }
 
@@ -373,7 +375,7 @@ h3.current:hover {
   color: #ffffff;
   text-align: right;
   font-size: 25px;
-  padding: 20px 10px 20px 10px;
+  padding: 20px 20px 20px 20px;
   font-weight: bold;
 }
 
@@ -382,27 +384,25 @@ h3.current:hover {
   text-align: center;
 }
 
-.city {
+h4.city {
   display: flex;
   text-transform: capitalize;
-  text-align: center;
   align-items: center;
+  text-align: center;
   background-color: #6a84ed;
   border-radius: 50px;
   flex-wrap: wrap;
   position: static;
   overflow: hidden;
-  text-align: center;
   font-size: 26px;
   color: #ffffff;
-  font-weight: bold;
   padding: 18px 18px 18px 18px;
-  margin-right: 10%;
+  margin-right: 5%;
   border-radius: 75px;
   border: 4px solid rgb(113, 129, 221);
 }
 
-.city:hover {
+h4.city:hover {
   display: flex;
   text-transform: capitalize;
   text-align: center;
@@ -412,12 +412,10 @@ h3.current:hover {
   flex-wrap: wrap;
   position: static;
   overflow: hidden;
-  text-align: center;
-  font-size: 30px;
+  font-size: 26px;
   color: #ffffff;
-  font-weight: bold;
   padding: 18px 18px 18px 18px;
-  margin-right: 10%;
+  margin-right: 5%;
   background-color: #717fcd;
   border-radius: 60px;
   border: 4px solid rgb(97, 90, 194);
@@ -449,20 +447,19 @@ h3.current:hover {
   margin-left: 7%;
   margin-top: 5px;
   margin-bottom: 5px;
-  font-weight: bold;
   font-size: 18px;
 }
 
 .dayOfWeek {
   display: flex;
-  align-items: left;
+  align-items: center;
   flex-wrap: wrap;
   color: rgb(103, 119, 214);
   color: rgb(88, 69, 182);
-  text-align: right;
+  text-align: left;
   font-size: larger;
   font-size: 18px;
-  padding: 20px 20px 20px 10px;
+  padding: 20px 20px 20px 20px;
   margin-top: 10px;
   margin-bottom: 10px;
   font-weight: bold;
