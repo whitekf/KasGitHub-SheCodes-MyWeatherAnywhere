@@ -1,10 +1,222 @@
 <!DOCTYPE html>
+
+<!--
+    SheCodes - Plus
+    Week 2 - Homework 1 
+    Kassie White
+    06/23/2022
+ -->
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!-- Including Axios in the head of HTML...-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <script
+      src="https://kit.fontawesome.com/839765e196.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Weather, anywhere. 🌤️</title>
   </head>
-  <body></body>
+
+  <body>
+    <div class="container">
+      <div class="centerBox">
+        <!-- Two Divs above should stay open until end -->
+
+        <div class="row">
+          <div class="col-8 align-self-center">
+            <h1 class="mainHeading">Weather, anywhere.</h1>
+          </div>
+          <div class="col-4 align-self-center">
+            <h3 class="dateAndTime align-self-center">
+              <ul>
+                <li id="fullDate">2022</li>
+                <li id="fullDay">Day</li>
+                <li id="fullTime">Time EST</li>
+              </ul>
+            </h3>
+          </div>
+        </div>
+
+        <div class="row">
+          <div col="10">
+            <form id="search-form">
+              <input
+                type="text"
+                size="50%"
+                placeholder="Search for a city"
+                autocomplete="off"
+                autofocus="on"
+                id="search-text-input"
+              />
+              <input class="inputButton" type="submit" value="Search" />
+            </form>
+            <br />
+
+            <div col="2">
+              <button class="currentButton">Current Location</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- -->
+
+        <div class="row">
+          <div class="col-12">
+            <h3 class="today">
+              Today:
+              <button class="CorF">°C or °F</button>
+            </h3>
+          </div>
+        </div>
+
+        <!-- -->
+        <!-- -->
+
+        <!--   <KASSIE> -->
+        <div class="row">
+          <div class="col-7 align-self-center">
+            <h3 class="current">
+              <span>
+                <ul>
+                  <li>
+                    Current:
+                    <span class="currentTemp"> X </span
+                    ><span class="CorFLetter" size="100">F°</span>
+                  </li>
+                  <li>
+                    <span class="currentDescription" size="100%">
+                      Feels like XYZ....
+                    </span>
+                  </li>
+                  <li>
+                    Humidity:
+                    <span class="currentHumidity"> X </span>
+                  </li>
+                  <li>
+                    Wind:
+                    <span class="currentWind" size="100%"> X </span>
+                  </li>
+                  <li>
+                    <span class="highLow" size="100">
+                      Low/High: X°F / X°F
+                    </span>
+                  </li>
+                </ul>
+              </span>
+            </h3>
+          </div>
+
+          <div class="col-1 weatherIconCurrent">
+            <i class="fa-solid fa-sun align-self-center"></i>
+          </div>
+          <div class="col-4 cityBox align-self-center">
+            <h4 class="city">Richmond, Virginia</h4>
+          </div>
+        </div>
+
+        <!-- <item> -->
+
+        <!-- <div class="row"><br /></div>  -->
+
+        <!-- <item> -->
+        <!-- <item> -->
+        <div class="row">
+          <div class="col-1"></div>
+          <div class="col-1 dayOfWeek">Tue</div>
+          <div class="col-7 otherDays align-self-center">
+            79 F / 82 F Sunny, Partly Cloudy
+            <div class="col-1"></div>
+          </div>
+          <div class="col-1 weatherIcon">
+            <i class="fa-solid fa-cloud-sun align-self-center"></i>
+          </div>
+          <div class="col-1"></div>
+        </div>
+
+        <!-- <item> -->
+        <!-- <item> -->
+        <div class="row">
+          <div class="col-1"></div>
+          <div class="col-1 dayOfWeek">Wed</div>
+          <div class="col-7 otherDays align-self-center">
+            79 F / 82 F Windy, 39mph Wind
+            <div class="col-1"></div>
+          </div>
+          <div class="col-1 weatherIcon">
+            <i class="fa-solid fa-wind align-self-center"></i>
+          </div>
+          <div class="col-1"></div>
+        </div>
+
+        <!-- <item> -->
+        <!-- <item> -->
+        <div class="row">
+          <div class="col-1"></div>
+          <div class="col-1 dayOfWeek">Thu</div>
+          <div class="col-7 otherDays align-self-center">
+            79 F / 82 F Windy 39mph
+            <div class="col-1"></div>
+          </div>
+          <div class="col-1 weatherIcon">
+            <i class="fa-solid fa-cloud-showers-heavy align-self-center"></i>
+          </div>
+          <div class="col-1"></div>
+        </div>
+
+        <!-- <item> -->
+        <!-- <item> -->
+        <div class="row">
+          <div class="col-1"></div>
+          <div class="col-1 dayOfWeek">Fri</div>
+          <div class="col-7 otherDays align-self-center">
+            23 F / 30 F Snow and Ice
+            <div class="col-1"></div>
+          </div>
+          <div class="col-1 weatherIcon">
+            <i class="fa-solid fa-snowflake align-self-center"></i>
+          </div>
+          <div class="col-1"></div>
+        </div>
+
+        <!-- <item> -->
+        <!-- <item> -->
+        <div class="row">
+          <div class="col-1"></div>
+          <div class="col-1 dayOfWeek">Sat</div>
+          <div class="col-7 otherDays align-self-center">
+            79 F / 82 F Windy 39mph
+            <div class="col-1"></div>
+          </div>
+          <div class="col-1 weatherIcon">
+            <i class="fa-solid fa-cloud-sun align-self-center"></i>
+          </div>
+          <div class="col-1"></div>
+        </div>
+        <!-- <item> -->
+
+        <footer class="foot align-self-center">
+          Designed and Coded by Kassie White
+        </footer>
+
+        <!-- Two Divs below should stay closed at end -->
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>

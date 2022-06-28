@@ -1,0 +1,37 @@
+showtemperature
+7
+26
+109
+131
+139
+208
+
+displayCurrentCity === searchCurrentCity
+
+
+____Order After "Curr Loc" Button Clicked:____
+getCurrentPosition()
+showPosition -> showTemperature()XXX 
+displayCurrentCity(event)
+showDescription* & showTemperature;
+--- Note: temp updates, city name does not
+--- Line 140 issue
+
+COME BACK TO THIS ^ 
+
+Also - what is going on at line 28? undefined
+
+JUST WATCH THE SOLUTION VIDEO....!
+
+
+____Order After User "submits" Search for City:___
+displaySearchedCity() -> showTemperatureXXX
+---Note: City name updates(~119), temp does not (~28)
+--------> go to displaySearchedCity and
+add axios..api call for city to get temp???
+Done?!?!?!!!! :-)
+
+
+
+
+
