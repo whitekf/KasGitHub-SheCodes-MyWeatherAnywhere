@@ -80,6 +80,9 @@ function displayWeatherCondition(response) {
     Math.round(response.data.wind.speed) + "mph";
   document.querySelector("span.currentDescription").innerHTML =
     response.data.weather[0].main;
+
+  //Kassie - added below for city name COME BACK! Need to check order of calls
+  document.querySelector("h4.city").innerHTML = response.data.name;
 }
 
 // Update city based on search input BELOW ------
