@@ -23,8 +23,11 @@ function displayDate() {
   if (minutes < 10) {
     minutes = "0" + minutes;
   }
-  let ampm = now.getHours() > 12 ? "pm" : "am";
+  let ampm = now.getHours() >= 12 ? "pm" : "am";
   hour = hour % 12;
+  if (hour === 0) {
+    hour = 12;
+  }
 
   let dayOfWk = [
     "Sunday",
