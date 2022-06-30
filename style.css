@@ -1,5 +1,5 @@
 body {
-  background-color: #e1def4;
+  background-color: #c6c2e4;
   font-family: Helvetica, "Consolas", "Courier New", monospace;
 }
 
@@ -8,6 +8,7 @@ body {
   align-items: center;
   flex-wrap: wrap;
   background-color: #98a3e3;
+  border-radius: 30px;
   display: block;
   margin-left: 3%;
   margin-right: 3%;
@@ -48,7 +49,7 @@ li {
   margin-left: 15px;
   padding-left: 5%;
   padding-top: 3%;
-  color: rgb(82, 36, 167);
+  color: rgb(98, 59, 183);
   font-weight: bold;
   transition: ease-in-out;
 }
@@ -71,7 +72,7 @@ button:hover {
   text-align: right;
   overflow: hidden;
   color: #ffffff;
-  margin-top: 3%;
+  margin-top: 5%;
   padding-top: 3%;
   font-size: 24px;
   font-weight: bold;
@@ -85,8 +86,8 @@ button:hover {
   position: sticky;
   text-align: right;
   overflow: hidden;
-  text-shadow: 1px 1px 1px #ea4dff;
-  margin-top: 3%;
+  text-shadow: 1px 1px 1px #8a269e;
+  margin-top: 5%;
   margin-right: 3%;
   padding-top: 3%;
   font-size: 26px;
@@ -136,9 +137,9 @@ button:hover {
   padding: 5px 5px 5px 5px;
   border-radius: 20px;
   border: rgb(89, 106, 202);
-  margin-top: 5px;
   margin-left: 5px;
   max-width: 100%;
+  font-size: 15px;
 }
 
 .currentButton:hover {
@@ -149,10 +150,9 @@ button:hover {
   position: static;
   padding: 5px 5px 5px 5px;
   border-radius: 20px;
-  background-color: #f4c948;
+  background-color: #f4af48;
   border: 2px solid rgb(224, 126, 22);
   max-width: 100%;
-  margin-top: 5px;
   margin-left: 5px;
   cursor: pointer;
 }
@@ -189,7 +189,7 @@ input.inputButton:hover {
   color: #fff;
   text-align: left;
   font-size: 26px;
-  margin-left: 10px;
+  margin-left: 12%;
   font-weight: bold;
   margin-top: 15px;
 }
@@ -200,16 +200,13 @@ button.CorF {
   padding: 5px 5px 5px 5px;
   border-radius: 25px;
   font-size: 15px;
-  margin-left: 10px;
   margin-right: 10px;
-  margin-bottom: 5px;
   color: rgb(88, 69, 182);
   display: block;
   outline: none;
   background-color: #ffffff;
   text-align: center;
   position: static;
-  margin-top: 5px;
   border: rgb(89, 106, 202);
   max-width: 100%;
 }
@@ -221,11 +218,8 @@ button.CorF:hover {
   border: 2px solid rgb(233, 255, 38);
   border-radius: 25px;
   font-size: 15px;
-  margin-left: 10px;
   margin-right: 10px;
   cursor: pointer;
-  margin-bottom: 5px;
-
   border: 2px solid rgb(217, 47, 255);
   padding: 5px 5px 5px 5px;
   display: block;
@@ -233,7 +227,6 @@ button.CorF:hover {
   background-color: #ff6bf3;
   text-align: center;
   position: static;
-  margin-top: 5px;
   max-width: 100%;
 }
 
@@ -404,11 +397,10 @@ h4.city:hover {
 .otherDays {
   text-align: center;
   color: white;
-  background-color: #98a3e3;
-  background-color: #8194e8;
+  background-color: #7083d8;
   position: relative;
-  border-radius: 50px;
-  border: 4px solid rgb(113, 129, 221);
+  border-radius: 100px;
+  border: 4px solid rgb(113, 113, 221);
   padding: 15px 20px 15px 20px;
   margin-left: 7%;
   margin-top: 5px;
@@ -421,7 +413,7 @@ h4.city:hover {
   color: white;
   background-color: #717fcd;
   position: relative;
-  border-radius: 50px;
+  border-radius: 100px;
   border: 4px solid rgb(83, 83, 187);
   padding: 15px 20px 15px 20px;
   margin-left: 7%;

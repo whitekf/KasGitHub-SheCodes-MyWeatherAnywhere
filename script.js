@@ -69,7 +69,7 @@ if (dateTime) {
 // - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // display weather details
-function displayWeatherCondition(response) {
+function displayCurWeatherCondition(response) {
   document.querySelector("h4.city").innerHTML = response.data.name;
   document.querySelector("span.currentTemp").innerHTML = Math.round(
     response.data.main.temp
@@ -79,10 +79,7 @@ function displayWeatherCondition(response) {
   document.querySelector("span.currentWind").innerHTML =
     Math.round(response.data.wind.speed) + "mph";
   document.querySelector("span.currentDescription").innerHTML =
-    response.data.weather[0].main;
-
-  //Kassie - added below for city name COME BACK! Need to check order of calls
-  document.querySelector("h4.city").innerHTML = response.data.name;
+    response.data.weather[0].description;
 }
 
 // Update city based on search input BELOW ------
@@ -106,7 +103,7 @@ function displaySearchedCity(event) {
     let units = "imperial";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
     //console.log(axios);
-    axios.get(`${apiUrl}&appid=${apiKey}`).then(displayWeatherCondition);
+    axios.get(`${apiUrl}&appid=${apiKey}`).then(displayCurWeatherCondition);
 
     //let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}`;
     // showTemperature;
@@ -121,7 +118,7 @@ function searchCurrentCity(position) {
   let units = "imperial";
   // let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}`;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=${units}`;
-  axios.get(`${apiUrl}&appid=${apiKey}`).then(displayWeatherCondition);
+  axios.get(`${apiUrl}&appid=${apiKey}`).then(displayMainWeatherCondition);
 }
 
 // Calls display city function when user submits from search bar
@@ -159,7 +156,7 @@ function updateTemp(event) {
 
 let cityEntered = document.querySelector("h4.city");
 cityEntered.innerHTML = city;
-axios.get(`${apiUrl}&appid=${apiKey}`).then(displayWeatherCondition);
+axios.get(`${apiUrl}&appid=${apiKey}`).then(displayCurWeatherCondition);
 
 // If user selects the C or F button, calls updateTemp function
 let tempToCorF = document.querySelector("button.CorF");
@@ -191,13 +188,13 @@ function showPosition(position) {
   //  let apiUrl = `${apiEndpoint}?lat=${latitude}&lon=${longitude}&cnt=10&appid=${apiKey}&units=${units}`;
   // axios.get(apiUrl).then(showTemperature);
 
-  axios.get(`${apiUrl}&appid=${apiKey}`).then(displayWeatherCondition);
+  axios.get(`${apiUrl}&appid=${apiKey}`).then(displayCurWeatherCondition);
   // console.log(apiUrl);
   navigator.geolocation.getCurrentPosition(searchCurrentCity);
 
   let curLocButton = document.querySelector("button.currentButton");
   curLocButton.addEventListener("click", getCurrentPosition);
-  // axios.get(apiUrl).then(displayWeatherCondition);
+  // axios.get(apiUrl).then(displayCurWeatherCondition);
 }
 
 // calls showPosition
