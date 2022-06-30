@@ -19,6 +19,7 @@ body {
 li {
   list-style: none;
   text-align: left;
+  text-transform: capitalize;
   margin-left: 20px;
   font-family: Helvetica;
 }
