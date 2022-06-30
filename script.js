@@ -158,12 +158,12 @@ function calcTemp(event) {
     curTemp.innerHTML = Math.round(celsiusTemp);
     CorFLet.innerHTML = "°C";
     // highLowTemp.innerHTML = " 33°C / 37°C ";
-    CorFBut.innerHTML = " [ °C ] or °F ";
+    CorFBut.innerHTML = " [°C] or °F ";
     defaultTemp = "C";
   } else {
     curTemp.innerHTML = Math.round((celsiusTemp * 9) / 5 + 32);
     // highLowTemp.innerHTML = " 79°F / 82°F ";
-    CorFBut.innerHTML = " °C or [ °F ] ";
+    CorFBut.innerHTML = " °C or [°F] ";
     CorFLet.innerHTML = "°F";
     defaultTemp = "F";
   }
