@@ -3,6 +3,8 @@ let apiKey = "15ed5d92f7b4157fdab57b1053c46052";
 let city = "Los Angeles";
 let units = "imperial";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}`;
+let celsiusTemp = null;
+let fahrenTemp = null;
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -73,10 +75,10 @@ if (dateTime) {
 
 // display current weather details
 function displayCurWeatherCondition(response) {
-  document.querySelector("h4.city").innerHTML = response.data.name;
-  document.querySelector("span.currentTemp").innerHTML = Math.round(
-    response.data.main.temp
-  );
+  let city = response.data.name;
+  document.querySelector("h4.city").innerHTML = city;
+  fahrenTemp = response.data.main.temp;
+  document.querySelector("span.currentTemp").innerHTML = Math.round(fahrenTemp);
   document.querySelector("span.currentHumidity").innerHTML =
     response.data.main.humidity + "%";
   document.querySelector("span.currentWind").innerHTML =
@@ -95,6 +97,8 @@ function displayOthWeatherCondition(response) {
   document.querySelector("span.otherTemp").innerHTML = Math.round(
     response.data.main.temp
   );
+  fahrenTemp = response.data.main.temp;
+  document.querySelector("span.currentTemp").innerHTML = Math.round(fahrenTemp);
   document.querySelector("span.otherHumidity").innerHTML =
     response.data.main.humidity + "%";
   document.querySelector("span.otherWind").innerHTML =
@@ -141,7 +145,7 @@ formInput.addEventListener("submit", displaySearchedCity);
 
 //Function when user clicks on the "C or F" button - updates temperature metric/imperial
 let defaultTemp = "F";
-function updateTemp(event) {
+function calcTemp(event) {
   let highLowTemp = document.querySelector("span.highLow");
   let curTemp = document.querySelector("span.currentTemp");
 
@@ -149,31 +153,31 @@ function updateTemp(event) {
   let CorFLet = document.querySelector("span.CorFLetter");
 
   if (defaultTemp === "F") {
-    curTemp.innerHTML = "15";
-    // Math.round((curTemp * 9) / 5 + 32);
+    //(Fahrenheit - 32) / 1.8
+    celsiusTemp = (fahrenTemp - 32) / 1.8;
+    curTemp.innerHTML = Math.round(celsiusTemp);
     CorFLet.innerHTML = "°C";
-    highLowTemp.innerHTML = " 33°C / 37°C ";
+    // highLowTemp.innerHTML = " 33°C / 37°C ";
     CorFBut.innerHTML = " [ °C ] or °F ";
     defaultTemp = "C";
   } else {
-    curTemp.innerHTML = "99";
-    // ((curTemp - 32) / 9) * 5;
-    CorFLet.innerHTML = "°F";
-    highLowTemp.innerHTML = " 79°F / 82°F ";
+    curTemp.innerHTML = Math.round((celsiusTemp * 9) / 5 + 32);
+    // highLowTemp.innerHTML = " 79°F / 82°F ";
     CorFBut.innerHTML = " °C or [ °F ] ";
+    CorFLet.innerHTML = "°F";
     defaultTemp = "F";
   }
   let tempToCorF = document.querySelector("button.CorF");
-  tempToCorF.addEventListener("click", updateTemp);
+  tempToCorF.addEventListener("click", calcTemp);
 }
 
 let cityEntered = document.querySelector("h4.city");
 cityEntered.innerHTML = city;
 axios.get(`${apiUrl}&appid=${apiKey}`).then(displayCurWeatherCondition);
 
-// If user selects the C or F button, calls updateTemp function
+// If user selects the C or F button, calls calcTemp function
 let tempToCorF = document.querySelector("button.CorF");
-tempToCorF.addEventListener("click", updateTemp);
+tempToCorF.addEventListener("click", calcTemp);
 
 // Function to show CURRENT location information AND calls to display city
 function showPosition(position) {
