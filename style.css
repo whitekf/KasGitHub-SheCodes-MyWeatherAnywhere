@@ -241,6 +241,16 @@ button.CorF:hover {
   color: white;
 }
 
+.otherTemp {
+  text-transform: capitalize;
+  font-size: 28px;
+  text-align: left;
+  margin-bottom: 15px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  color: white;
+}
+
 .CorFLetter {
   font-size: 18px;
   text-align: left;

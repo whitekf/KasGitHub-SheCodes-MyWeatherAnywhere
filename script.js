@@ -83,6 +83,31 @@ function displayCurWeatherCondition(response) {
     Math.round(response.data.wind.speed) + "mph";
   document.querySelector("span.currentDescription").innerHTML =
     response.data.weather[0].description;
+  let weatherIcon = document.querySelector("weatherIconCurrent");
+  weatherIcon.setAttribute(
+    "weatherIconCurrent",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  //   if (response.data.weather[0].description >= 50) {
+  //  //    document.getElementsByClassName("h3.current").style
+  //     let elements = document.querySelectorAll("h3.current");
+  //       elements.forEach(element => {
+  //           display: flex;
+  //           align-items: center;
+  //           flex-wrap: wrap;
+  //           text-align: center;
+  //           position: relative;
+  //           color: white;
+  //           background-color: red;
+  //           border-radius: 100px;
+  //           border: 4px solid rgb(121, 104, 206);
+  //           padding: 15px 10px 15px 10px;
+  //           margin-left: 35px;
+  //           margin-right: 5px;
+  //           font-size: 20px;
+  //           }
+  //       }
+  //       );
 }
 
 // display otherDays weather details
@@ -183,34 +208,17 @@ function showPosition(position) {
   console.log(position);
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
-  // WHY WON'T CITY NAME WORK....?
-  let cityName = position.name;
-  console.log("cityName");
 
-  let cityLoc = document.querySelector("h4.city");
-  //let nameOfCity = position.data.name;
-  // cityLoc.innerHTML = cityName + " " + nameOfCity + " " + latitude;
-  cityLoc.innerHTML = latitude + " and " + longitude + " and " + cityName;
-  //let cityLocation = response.data.city.name;
-  //console.log("cityLocation");
-
-  //  + " and " + cityLocation;
-  // cityLoc.innerHTML = cityLocation;
   let apiKey = `15ed5d92f7b4157fdab57b1053c46052`;
   let units = "imperial";
   let apiEndpoint = `https://api.openweathermap.org/data/2.5/weather`;
   let apiUrl = `${apiEndpoint}?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
-  //  let apiUrl = `${apiEndpoint}?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
-  //  let apiUrl = `${apiEndpoint}?lat=${latitude}&lon=${longitude}&cnt=10&appid=${apiKey}&units=${units}`;
-  // axios.get(apiUrl).then(showTemperature);
 
   axios.get(`${apiUrl}&appid=${apiKey}`).then(displayCurWeatherCondition);
-  // console.log(apiUrl);
   navigator.geolocation.getCurrentPosition(searchCurrentCity);
 
   let curLocButton = document.querySelector("button.currentButton");
   curLocButton.addEventListener("click", getCurrentPosition);
-  // axios.get(apiUrl).then(displayCurWeatherCondition);
 }
 
 // calls showPosition
