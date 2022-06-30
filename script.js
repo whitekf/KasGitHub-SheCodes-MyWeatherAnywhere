@@ -83,31 +83,11 @@ function displayCurWeatherCondition(response) {
     Math.round(response.data.wind.speed) + "mph";
   document.querySelector("span.currentDescription").innerHTML =
     response.data.weather[0].description;
-  let weatherIcon = document.querySelector("weatherIconCurrent");
-  weatherIcon.setAttribute(
+  let iconElement = document.querySelector(".weatherIconCurrent");
+  iconElement.setAttribute(
     "weatherIconCurrent",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
-  //   if (response.data.weather[0].description >= 50) {
-  //  //    document.getElementsByClassName("h3.current").style
-  //     let elements = document.querySelectorAll("h3.current");
-  //       elements.forEach(element => {
-  //           display: flex;
-  //           align-items: center;
-  //           flex-wrap: wrap;
-  //           text-align: center;
-  //           position: relative;
-  //           color: white;
-  //           background-color: red;
-  //           border-radius: 100px;
-  //           border: 4px solid rgb(121, 104, 206);
-  //           padding: 15px 10px 15px 10px;
-  //           margin-left: 35px;
-  //           margin-right: 5px;
-  //           font-size: 20px;
-  //           }
-  //       }
-  //       );
 }
 
 // display otherDays weather details
@@ -129,12 +109,9 @@ function displaySearchedCity(event) {
 
   // uses the city name that the user enters
   let searchIn = document.querySelector("#search-text-input");
-  console.log(searchIn.value);
-
   let cityInput = document.querySelector("h4.city");
 
-  // make an API call to OpenWeather API
-  // once you get a response, display city name and temp
+  // make an API call to OpenWeather API & once response rcvd, display city name & temp
   if (searchIn.value) {
     cityInput.innerHTML = searchIn.value;
     let apiKey = "15ed5d92f7b4157fdab57b1053c46052";
@@ -142,11 +119,7 @@ function displaySearchedCity(event) {
     let city = searchIn.value;
     let units = "imperial";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
-    //console.log(axios);
     axios.get(`${apiUrl}&appid=${apiKey}`).then(displayCurWeatherCondition);
-
-    //let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}`;
-    // showTemperature;
   } else {
     cityInput.innerHTML = "Please enter a city.";
   }
@@ -165,7 +138,6 @@ function searchCurrentCity(position) {
 // Calls display city function when user submits from search bar
 let formInput = document.querySelector("#search-form");
 formInput.addEventListener("submit", displaySearchedCity);
-// Update city based on search input ABOVE ------
 
 //Function when user clicks on the "C or F" button - updates temperature metric/imperial
 let defaultTemp = "F";

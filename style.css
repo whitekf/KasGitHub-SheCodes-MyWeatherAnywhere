@@ -406,12 +406,16 @@ h4.city:hover {
   background-color: #7083d8;
   position: relative;
   border-radius: 100px;
-  border: 4px solid rgb(113, 113, 221);
-  padding: 15px 10px 15px 10px;
-  margin-left: 7%;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  border: 3px solid rgb(113, 113, 221);
+  padding: 5px 5px 5px 5px;
+  margin-top: 1%;
+  margin-bottom: 1%;
   font-size: 16px;
+}
+
+.weatherHeading {
+  text-align: right;
+  margin-right: 10%;
 }
 
 .otherDays:hover {
@@ -420,11 +424,10 @@ h4.city:hover {
   background-color: #717fcd;
   position: relative;
   border-radius: 100px;
-  border: 4px solid rgb(83, 83, 187);
-  padding: 15px 10px 15px 10px;
-  margin-left: 7%;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  border: 3px solid rgb(83, 83, 187);
+  padding: 5px 5px 5px 5px;
+  margin-top: 1%;
+  margin-bottom: 1%;
   font-size: 16px;
 }
 
