@@ -82,8 +82,7 @@ if (dateTime) {
 // display current weather details
 function displayCurWeatherCondition(response) {
   let city = response.data.name;
-  let iconElement = document.querySelector("#iconW");
-  // let anIconElement = document.querySelector("weatherIconCurrent");
+  let iconElement = document.querySelector("#icon");
 
   document.querySelector("h4.city").innerHTML = city;
   fahrenTemp = response.data.main.temp;
@@ -96,12 +95,11 @@ function displayCurWeatherCondition(response) {
     Math.round(response.data.wind.speed) + "mph";
   document.querySelector("span.currentDescription").innerHTML =
     response.data.weather[0].description;
-  //  let iconData = response.data.weather[0].icon;
-  let iconData = response.data.weather[0];
-  // iconElement.innerHTML = "Egg";
+  let iconData = response.data.weather[0].icon;
+
   iconElement.setAttribute(
     "src",
-    `http://openweathermap.org/img/wn/04d@2x.png`
+    `http://openweathermap.org/img/wn/${iconData}@2x.png`
   );
   // iconElement.innerHTML = `http://openweathermap.org/img/wn/${iconData}@2x.png`;
 
@@ -152,6 +150,7 @@ function displaySearchedCity(event) {
     let units = "imperial";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
     axios.get(`${apiUrl}&appid=${apiKey}`).then(displayCurWeatherCondition);
+    axios.get(`${apiUrl}&appid=${apiKey}`).then(displayOthWeatherCondition);
   } else {
     cityInput.innerHTML = "Please enter a city.";
   }

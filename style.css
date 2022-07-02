@@ -325,37 +325,12 @@ h3.current:hover {
   font-size: 20px;
 }
 
-#iconW {
+#icon {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  color: #ffffff;
   text-align: center;
   font-size: 38px;
-  padding: 10px 10px 10px 10px;
-  font-weight: bold;
-}
-
-.weatherIconCurrent {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  color: #ffffff;
-  text-align: center;
-  font-size: 38px;
-  padding: 10px 10px 10px 10px;
-  font-weight: bold;
-}
-
-.weatherIconCurrent:hover {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  color: #fefa8d;
-  text-align: center;
-  font-size: 38px;
-  padding: 10px 10px 10px 10px;
-  font-weight: bold;
 }
 
 .weatherIcon {
