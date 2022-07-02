@@ -169,7 +169,7 @@ input.inputButton {
   margin-top: 5px;
   border: rgb(89, 106, 202);
   max-width: 100%;
-  margin-left: 55%;
+  margin-left: 45%;
 }
 
 input.inputButton:hover {
@@ -182,7 +182,7 @@ input.inputButton:hover {
   border: 2px solid rgb(190, 224, 22);
   max-width: 100%;
   margin-top: 5px;
-  margin-left: 55%;
+  margin-left: 45%;
   cursor: pointer;
 }
 
@@ -337,8 +337,8 @@ h3.current:hover {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  color: #ffffff;
   text-align: right;
+  color: #bdf6fc;
   font-size: 30px;
   padding: 20px 20px 20px 20px;
   font-weight: bold;
