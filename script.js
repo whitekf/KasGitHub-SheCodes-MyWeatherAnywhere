@@ -158,6 +158,8 @@ function displaySearchedCity(event) {
 
 // function used when user clicks "Current Location" button to show city/temp
 function searchCurrentCity(position) {
+  ///////
+
   let apiKey = "15ed5d92f7b4157fdab57b1053c46052";
   let units = "imperial";
   // let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}`;
