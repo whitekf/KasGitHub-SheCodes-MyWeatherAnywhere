@@ -5,6 +5,12 @@ let units = "imperial";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}`;
 let celsiusTemp = null;
 let fahrenTemp = null;
+let defaultTemp = "F";
+let CorFBut = document.querySelector(".CorF");
+let CorFLet = document.querySelector("span.CorFLetter");
+CorFLet = "F";
+
+// testing below Kassie
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -76,24 +82,46 @@ if (dateTime) {
 // display current weather details
 function displayCurWeatherCondition(response) {
   let city = response.data.name;
+  let iconElement = document.querySelector("#iconW");
+  // let anIconElement = document.querySelector("weatherIconCurrent");
+
   document.querySelector("h4.city").innerHTML = city;
   fahrenTemp = response.data.main.temp;
   document.querySelector("span.currentTemp").innerHTML = Math.round(fahrenTemp);
+  document.querySelector("span.CorFLetter").innerHTML = "°F";
+  document.querySelector(".CorF").innerHTML = " °C or [°F] ";
   document.querySelector("span.currentHumidity").innerHTML =
     response.data.main.humidity + "%";
   document.querySelector("span.currentWind").innerHTML =
     Math.round(response.data.wind.speed) + "mph";
   document.querySelector("span.currentDescription").innerHTML =
     response.data.weather[0].description;
-  let iconElement = document.querySelector(".weatherIconCurrent");
+  //  let iconData = response.data.weather[0].icon;
+  let iconData = response.data.weather[0];
+  // iconElement.innerHTML = "Egg";
   iconElement.setAttribute(
-    "weatherIconCurrent",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    "src",
+    `http://openweathermap.org/img/wn/04d@2x.png`
   );
+  // iconElement.innerHTML = `http://openweathermap.org/img/wn/${iconData}@2x.png`;
+
+  // let locationIcon = document.querySelector(".weather-icon");
+  // const { icon } = data.weather[0];
+  // locationIcon.innerHTML = `<img src="icons/${icon}.png">`;
+  // iconElement.setAttribute(
+  //   "src",
+  //   `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  // );
 }
 
 // display otherDays weather details
 function displayOthWeatherCondition(response) {
+  if (units === "imperial") {
+    let CorFLet = document.querySelector("span.CorFLetter");
+    CorFLet = "F";
+  } else {
+    CorFLet = "C";
+  }
   document.querySelector("span.otherTemp").innerHTML = Math.round(
     response.data.main.temp
   );
@@ -144,7 +172,7 @@ let formInput = document.querySelector("#search-form");
 formInput.addEventListener("submit", displaySearchedCity);
 
 //Function when user clicks on the "C or F" button - updates temperature metric/imperial
-let defaultTemp = "F";
+defaultTemp = "F";
 function calcTemp(event) {
   let highLowTemp = document.querySelector("span.highLow");
   let curTemp = document.querySelector("span.currentTemp");
@@ -156,17 +184,27 @@ function calcTemp(event) {
     //(Fahrenheit - 32) / 1.8
     celsiusTemp = (fahrenTemp - 32) / 1.8;
     curTemp.innerHTML = Math.round(celsiusTemp);
-    CorFLet.innerHTML = "°C";
+    units = "metric";
     // highLowTemp.innerHTML = " 33°C / 37°C ";
+    CorFLet.innerHTML = "°C";
     CorFBut.innerHTML = " [°C] or °F ";
     defaultTemp = "C";
   } else {
     curTemp.innerHTML = Math.round((celsiusTemp * 9) / 5 + 32);
     // highLowTemp.innerHTML = " 79°F / 82°F ";
-    CorFBut.innerHTML = " °C or [°F] ";
+    units = "imperial";
     CorFLet.innerHTML = "°F";
+    CorFBut.innerHTML = " °C or [°F] ";
     defaultTemp = "F";
   }
+
+  if (units === "imperial") {
+    let CorFLet = document.querySelector("span.CorFLetter");
+    CorFLet = "F";
+  } else {
+    CorFLet = "C";
+  }
+
   let tempToCorF = document.querySelector("button.CorF");
   tempToCorF.addEventListener("click", calcTemp);
 }
@@ -187,6 +225,14 @@ function showPosition(position) {
 
   let apiKey = `15ed5d92f7b4157fdab57b1053c46052`;
   let units = "imperial";
+
+  if (units === "imperial") {
+    let CorFLet = document.querySelector("span.CorFLetter");
+    CorFLet = "F";
+  } else {
+    CorFLet = "C";
+  }
+
   let apiEndpoint = `https://api.openweathermap.org/data/2.5/weather`;
   let apiUrl = `${apiEndpoint}?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
 

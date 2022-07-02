@@ -302,7 +302,7 @@ h3.current {
   color: white;
   background-color: #6a84ed;
   border-radius: 100px;
-  border: 4px solid rgb(121, 104, 206);
+  border: 4px solid rgb(132, 114, 217);
   padding: 15px 10px 15px 10px;
   margin-left: 35px;
   margin-right: 5px;
@@ -323,6 +323,17 @@ h3.current:hover {
   margin-left: 35px;
   margin-right: 5px;
   font-size: 20px;
+}
+
+#iconW {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  color: #ffffff;
+  text-align: center;
+  font-size: 38px;
+  padding: 10px 10px 10px 10px;
+  font-weight: bold;
 }
 
 .weatherIconCurrent {
