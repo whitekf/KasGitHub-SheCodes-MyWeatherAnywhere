@@ -1,3 +1,9 @@
+7/02/22
+-there is a glitch when going from F to C, and then clicking on current location...and CorF button again
+-unable to get weather icon to work/update
+
+
+
 showtemperature
 7
 26

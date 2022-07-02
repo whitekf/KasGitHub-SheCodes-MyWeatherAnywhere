@@ -224,14 +224,6 @@ function showPosition(position) {
   let longitude = position.coords.longitude;
 
   let apiKey = `15ed5d92f7b4157fdab57b1053c46052`;
-  let units = "imperial";
-
-  if (units === "imperial") {
-    let CorFLet = document.querySelector("span.CorFLetter");
-    CorFLet = "F";
-  } else {
-    CorFLet = "C";
-  }
 
   let apiEndpoint = `https://api.openweathermap.org/data/2.5/weather`;
   let apiUrl = `${apiEndpoint}?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
