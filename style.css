@@ -108,7 +108,7 @@ button:hover {
   border-radius: 40px;
   border: rgb(61, 77, 163);
   max-width: 100%;
-  margin-left: 10%;
+  margin-left: 8%;
 }
 
 #search-text-input:hover {
@@ -124,7 +124,7 @@ button:hover {
   border-radius: 40px;
   border: rgb(61, 77, 163);
   max-width: 100%;
-  margin-left: 10%;
+  margin-left: 8%;
   cursor: pointer;
 }
 
@@ -326,21 +326,26 @@ h3.current:hover {
 }
 
 .curWeatherIcon {
+  border-radius: 250px;
   display: flex;
   align-items: center;
+  text-align: center;
+  line-height: 100px;
   flex-wrap: wrap;
   text-align: center;
   font-size: 30px;
-  text-align: left;
+}
+
+img {
+  text-align: center;
+  align-items: center;
 }
 
 #icon {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  text-align: center;
   font-size: 30px;
-  text-align: left;
+  text-align: center;
 }
 
 .weatherIcon {
