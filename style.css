@@ -377,7 +377,7 @@ h4.city {
   font-size: 26px;
   color: #ffffff;
   padding: 18px 18px 18px 18px;
-  margin-right: 5%;
+  margin-right: 8%;
   border-radius: 75px;
   border: 4px solid rgb(113, 129, 221);
 }
@@ -399,6 +399,36 @@ h4.city:hover {
   background-color: #717fcd;
   border-radius: 60px;
   border: 4px solid rgb(97, 90, 194);
+}
+
+.weather-temperature .active:hover {
+  text-decoration: none;
+}
+
+.weather-forecast-sum {
+  margin-top: 22px;
+  text-align: center;
+  color: #000;
+  background-color: rgb(212, 207, 234);
+  padding: 5px 5px 5px 5px;
+  border-radius: 180px;
+}
+
+.weather-forecast-day {
+  font-size: 16px;
+  opacity: 0.5;
+}
+
+.weather-forecast-temp-max {
+  opacity: 0.9;
+}
+
+.weather-forecast-temp-min {
+  opacity: 0.5;
+}
+
+.weather-forecast-temperatures {
+  font-size: 16px;
 }
 
 .otherDays {
