@@ -121,91 +121,93 @@ function displayOthWeatherCondition(response) {
   } else {
     CorFLet = "C";
   }
-  document.querySelector("span.otherTemp").innerHTML = Math.round(
-    response.data.main.temp
-  );
-  fahrenTemp = response.data.main.temp;
-  document.querySelector("span.currentTemp").innerHTML = Math.round(fahrenTemp);
-  document.querySelector("span.otherHumidity").innerHTML =
-    response.data.main.humidity + "%";
-  document.querySelector("span.otherWind").innerHTML =
-    Math.round(response.data.wind.speed) + "mph";
-  document.querySelector("span.otherDescription").innerHTML =
-    response.data.weather[0].description;
   displayForecast();
-  otherDaysInRows();
+  //otherDaysInRows();
+}
+
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  return days[day];
 }
 
 // OTHER DAY FORECAST - Write code once and duplicate in JS
 function displayForecast(response) {
-  console.log(response.data.daily);
+  let forecast = response.data.daily;
+  console.log(forecast);
+
   let forecastElement = document.querySelector("#forecast");
 
-  let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
-
-  let forecastHTML = `<div class="row">`;
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
+  let forecastHTML = `<div class="row weatherRow">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML += `
         <div class="col-2 weather-forecast">
-          <div class="weather-forecast-day">${day}</div>
-          <img
-            src="http://openweathermap.org/img/wn/50d@2x.png"
+          <div class="weather-forecast-day">${formatDay(forecastDay.dt)}</div>
+          <img class="weather-icon"
+            src="http://openweathermap.org/img/wn/${
+              forecastDay.weather[0].icon
+            }@2x.png"
             alt=""
             width="42"
           />
           <div class="weather-forecast-temperatures">
-            <span class="weather-forecast-temp-max"> 74 </span>
+            <span class="weather-forecast-temp-max"> ${Math.round(
+              forecastDay.temp.max
+            )}° </span>
             <span> | </span>
-            <span class="weather-forecast-temp-min"> 44 </span>
+            <span class="weather-forecast-temp-min"> ${Math.round(
+              forecastDay.temp.min
+            )}° </span>
           </div>
+          <div class="forecastMain"> ${forecastDay.weather[0].main} </div>
         </div>
       `;
+    }
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
 
 // rows of days displayed
-function otherDaysInRows() {
+function otherDaysInRows(response) {
+  let forecast = response.data.daily;
   let otherDaysElement = document.querySelector("#otherDaysFor");
 
-  let days = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tues"];
   let othDaysForecastHTML = `<div class="row">`;
-  days.forEach(function (day) {
-    othDaysForecastHTML =
-      othDaysForecastHTML +
-      `        <div class="row">
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      othDaysForecastHTML += `        <div class="row">
             <div class="col-1"></div>
-            <div class="col-1 dayOfWeek">${day}</div>
+            <div class="col-1 dayOfWeek">${formatDay(forecastDay.dt)}</div>
             <div class="col-8 otherDays align-self-center">
               <ul>
                 <li class="weatherHeading">
                   <span class="otherTemp"> X </span
                   ><span class="CorFLetter" size="100">°F</span>
-                  <span class="otherDescription" size="100%"> Clear sky </span>
+                  <span class="otherDescription" size="100%">  ${
+                    forecastDay.weather[0].main
+                  }  </span>
                 </li>
                 <li>
-                  Humidity:
-                  <span class="otherHumidity"> X </span>
-                </li>
-                <li>
-                  Wind:
-                  <span class="otherWind" size="100%"> X </span>
-                </li>
-                <li>
-                  High/Low:
-                  <span class="otherHighLow" size="100"> X°F / X°F </span>
+                  <span class="otherHighLow" size="100"> ${Math.round(
+                    forecastDay.temp.max
+                  )}°F / ${Math.round(forecastDay.temp.min)}°F </span>
                 </li>
               </ul>
             </div>
-            <div class="col-1 weatherIcon">
-              <i class="fa-solid fa-cloud-sun align-self-center"></i>
-            </div>
+          <img
+            src="http://openweathermap.org/img/wn/${
+              forecastDay.weather[0].icon
+            }@2x.png"
+            alt=""
+            width="42"
+          />
             <div class="col-1"></div>
           </div>
      `;
+    }
   });
   othDaysForecastHTML = othDaysForecastHTML + `</div>`;
   otherDaysElement.innerHTML = othDaysForecastHTML;
@@ -236,7 +238,9 @@ function displaySearchedCity(event) {
 
 // function used when user clicks "Current Location" button to show city/temp
 function searchCurrentCity(position) {
-  ///////
+  // KASSIE COME BACK NEED TO FIGURE OUT WHY THIS ISN'T REMOVING TEXT IN SEARCH FIELD
+  let searchIn = document.querySelector("#search-text-input");
+  searchIn.value.innerHTML = "";
 
   let apiKey = "15ed5d92f7b4157fdab57b1053c46052";
   let units = "imperial";
@@ -315,7 +319,6 @@ function showPosition(position) {
 }
 
 function getForecast(coordinates) {
-  console.log(coordinates);
   let lat = coordinates.lat;
   let lon = coordinates.lon;
   let units = "imperial";
@@ -323,6 +326,7 @@ function getForecast(coordinates) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
   console.log(apiUrl);
   axios.get(apiUrl).then(displayForecast);
+  //axios.get(apiUrl).then(otherDaysInRows);
 }
 
 // calls showPosition
@@ -333,5 +337,3 @@ function getCurrentPosition() {
 // when user clicks "current location" button
 let curLocButton = document.querySelector("button.currentButton");
 curLocButton.addEventListener("click", getCurrentPosition);
-
-otherDaysInRows();

@@ -64,7 +64,7 @@ button:hover {
   cursor: pointer;
 }
 
-.dateAndTime {
+h3.dateAndTime {
   display: flex;
   font-family: "Consolas", "Courier New", monospace, Helvetica;
   align-items: center;
@@ -79,7 +79,7 @@ button:hover {
   font-weight: bold;
 }
 
-.dateAndTime:hover {
+h3.dateAndTime:hover {
   display: flex;
   font-family: "Consolas", "Courier New", monospace, Helvetica;
   align-items: center;
@@ -330,10 +330,10 @@ h3.current:hover {
   display: flex;
   align-items: center;
   text-align: center;
-  line-height: 100px;
+  line-height: 50px;
   flex-wrap: wrap;
   text-align: center;
-  font-size: 30px;
+  font-size: 38px;
 }
 
 img {
@@ -344,7 +344,7 @@ img {
 #icon {
   display: flex;
   align-items: center;
-  font-size: 30px;
+  font-size: 20px;
   text-align: center;
 }
 
@@ -354,7 +354,7 @@ img {
   flex-wrap: wrap;
   text-align: right;
   color: #bdf6fc;
-  font-size: 30px;
+  font-size: 20px;
   padding: 20px 20px 20px 20px;
   font-weight: bold;
 }
@@ -406,7 +406,17 @@ h4.city:hover {
 }
 
 #forecast {
-  margin-left: 10%;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.weatherRow {
+  background-color: rgb(121, 94, 211);
+  border-radius: 50px;
+  align-items: center;
+  text-align: center;
+  margin-left: 1%;
+  margin-right: 1%;
 }
 
 .weather-forecast {
