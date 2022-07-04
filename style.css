@@ -7,7 +7,7 @@ body {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  background-color: #98a3e3;
+  background-color: #8995d8;
   border-radius: 30px;
   display: block;
   margin-left: 3%;
@@ -502,7 +502,6 @@ h4.city:hover {
 .foot {
   display: block;
   color: white;
-  background-color: #98a3e3;
   text-align: center;
   align-items: center;
   margin-left: 8%;

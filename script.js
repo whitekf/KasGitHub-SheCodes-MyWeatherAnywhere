@@ -89,12 +89,18 @@ function displayCurWeatherCondition(response) {
   document.querySelector("span.currentTemp").innerHTML = Math.round(fahrenTemp);
   document.querySelector("span.CorFLetter").innerHTML = "°F";
   document.querySelector(".CorF").innerHTML = " °C or [°F] ";
+  document.querySelector("span.currentDescription").innerHTML =
+    response.data.weather[0].description;
   document.querySelector("span.currentHumidity").innerHTML =
     response.data.main.humidity + "%";
   document.querySelector("span.currentWind").innerHTML =
     Math.round(response.data.wind.speed) + "mph";
-  document.querySelector("span.currentDescription").innerHTML =
-    response.data.weather[0].description;
+  document.querySelector("span.feelsLike").innerHTML =
+    Math.round(response.data.main.feels_like) + "° ";
+  document.querySelector("span.highLow").innerHTML =
+    Math.round(response.data.main.temp.min) + "° ";
+  console.log(response.data.current);
+
   let iconData = response.data.weather[0].icon;
 
   iconElement.setAttribute(
@@ -121,8 +127,6 @@ function displayOthWeatherCondition(response) {
   } else {
     CorFLet = "C";
   }
-  displayForecast();
-  //otherDaysInRows();
 }
 
 function formatDay(timestamp) {
