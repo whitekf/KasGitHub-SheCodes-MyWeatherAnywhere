@@ -38,11 +38,11 @@
         <!-- Two Divs above should stay open until end -->
 
         <div class="row">
-          <div class="col-7 align-self-center">
+          <div class="col-8 align-self-center">
             <h1 class="mainHeading">Weather, anywhere.</h1>
           </div>
-          <div class="col-5 align-self-center">
-            <h3 class="dateAndTime align-self-center">
+          <div class="col-4 align-self-center">
+            <h3 class="dateAndTime">
               <ul>
                 <li id="fullDate">2022</li>
                 <li id="fullDay">Day</li>
@@ -99,6 +99,7 @@
                   Current:
                   <span class="currentTemp"> X </span
                   ><span class="CorFLetter" size="100">°F </span>
+                  <br />
                   <span
                     class="currentDescription align-self-center"
                     size="100%"
@@ -114,24 +115,26 @@
                   Wind:
                   <span class="currentWind" size="100%"> X </span>
                 </li>
-                <li>
+                <li class="feelsLike">
                   Feels like
-                  <span class="feelsLike"> X </span>
+                  <span class="feelsLikeTemp"> X </span
+                  ><span class="CorFLetter" size="100">°F </span>
                 </li>
                 <li>
                   High/Low:
                   <span class="highLow" size="100"> X°F / X°F </span>
                 </li>
               </ul>
+              <div class="col-2 align-self-center curWeatherIcon">
+                <img
+                  src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
+                  alt="weather image"
+                  id="currentIcon"
+                />
+              </div>
             </h3>
           </div>
-          <div class="col-2 align-self-center curWeatherIcon">
-            <img
-              src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
-              alt="weather image"
-              id="icon"
-            />
-          </div>
+
           <div class="col-3 cityBox align-self-center">
             <h4 class="city">Richmond, Virginia</h4>
           </div>

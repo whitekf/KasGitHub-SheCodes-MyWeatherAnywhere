@@ -5,6 +5,12 @@ let units = "imperial";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}`;
 let celsiusTemp = null;
 let fahrenTemp = null;
+let fTempMin = null;
+let fTempMax = null;
+let cTempMin = null;
+let cTempMax = null;
+let fTempFL = null;
+let curFeelsLike = null;
 let defaultTemp = "F";
 let CorFBut = document.querySelector(".CorF");
 let CorFLet = document.querySelector("span.CorFLetter");
@@ -82,7 +88,8 @@ if (dateTime) {
 // display current weather details
 function displayCurWeatherCondition(response) {
   let city = response.data.name;
-  let iconElement = document.querySelector("#icon");
+  let iconElement = document.querySelector("#currentIcon");
+  curFeelsLike = response.data.main.feels_like;
 
   document.querySelector("h4.city").innerHTML = city;
   fahrenTemp = response.data.main.temp;
@@ -95,8 +102,9 @@ function displayCurWeatherCondition(response) {
     response.data.main.humidity + "%";
   document.querySelector("span.currentWind").innerHTML =
     Math.round(response.data.wind.speed) + "mph";
-  document.querySelector("span.feelsLike").innerHTML =
-    Math.round(response.data.main.feels_like) + "° ";
+  document.querySelector("span.feelsLikeTemp").innerHTML = Math.round(
+    response.data.main.feels_like
+  );
   document.querySelector("span.highLow").innerHTML =
     Math.round(response.data.main.temp.min) + "° ";
   console.log(response.data.current);
@@ -145,7 +153,9 @@ function displayForecast(response) {
 
   let forecastHTML = `<div class="row weatherRow">`;
   forecast.forEach(function (forecastDay, index) {
-    if (index < 6) {
+    if (index < 5) {
+      fTempMin = forecastDay.temp.min;
+      fTempMax = forecastDay.temp.max;
       forecastHTML += `
         <div class="col-2 weather-forecast">
           <div class="weather-forecast-day">${formatDay(forecastDay.dt)}</div>
@@ -174,49 +184,6 @@ function displayForecast(response) {
   forecastElement.innerHTML = forecastHTML;
 }
 
-// rows of days displayed
-function otherDaysInRows(response) {
-  let forecast = response.data.daily;
-  let otherDaysElement = document.querySelector("#otherDaysFor");
-
-  let othDaysForecastHTML = `<div class="row">`;
-  forecast.forEach(function (forecastDay, index) {
-    if (index < 6) {
-      othDaysForecastHTML += `        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-1 dayOfWeek">${formatDay(forecastDay.dt)}</div>
-            <div class="col-8 otherDays align-self-center">
-              <ul>
-                <li class="weatherHeading">
-                  <span class="otherTemp"> X </span
-                  ><span class="CorFLetter" size="100">°F</span>
-                  <span class="otherDescription" size="100%">  ${
-                    forecastDay.weather[0].main
-                  }  </span>
-                </li>
-                <li>
-                  <span class="otherHighLow" size="100"> ${Math.round(
-                    forecastDay.temp.max
-                  )}°F / ${Math.round(forecastDay.temp.min)}°F </span>
-                </li>
-              </ul>
-            </div>
-          <img
-            src="http://openweathermap.org/img/wn/${
-              forecastDay.weather[0].icon
-            }@2x.png"
-            alt=""
-            width="42"
-          />
-            <div class="col-1"></div>
-          </div>
-     `;
-    }
-  });
-  othDaysForecastHTML = othDaysForecastHTML + `</div>`;
-  otherDaysElement.innerHTML = othDaysForecastHTML;
-}
-
 // Update city based on search input BELOW ------
 function displaySearchedCity(event) {
   event.preventDefault();
@@ -231,10 +198,10 @@ function displaySearchedCity(event) {
     let apiKey = "15ed5d92f7b4157fdab57b1053c46052";
     // let city = document.querySelector("h4.city").value;
     let city = searchIn.value;
-    let units = "imperial";
+    units = "imperial";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
     axios.get(`${apiUrl}&appid=${apiKey}`).then(displayCurWeatherCondition);
-    axios.get(`${apiUrl}&appid=${apiKey}`).then(displayOthWeatherCondition);
+    // axios.get(`${apiUrl}&appid=${apiKey}`).then(displayOthWeatherCondition);
   } else {
     cityInput.innerHTML = "Please enter a city.";
   }
@@ -259,27 +226,39 @@ let formInput = document.querySelector("#search-form");
 formInput.addEventListener("submit", displaySearchedCity);
 
 //Function when user clicks on the "C or F" button - updates temperature metric/imperial
-defaultTemp = "F";
 function calcTemp(event) {
   let highLowTemp = document.querySelector("span.highLow");
   let curTemp = document.querySelector("span.currentTemp");
+  let feelsLike = document.querySelector("span.feelsLikeTemp");
+  let feelsLikeTemp = curFeelsLike;
 
   let CorFBut = document.querySelector(".CorF");
   let CorFLet = document.querySelector("span.CorFLetter");
 
+  if (units === "imperial") {
+    units = "metric";
+  } else {
+    units = "imperial";
+  }
+
   if (defaultTemp === "F") {
-    //(Fahrenheit - 32) / 1.8
     celsiusTemp = (fahrenTemp - 32) / 1.8;
     curTemp.innerHTML = Math.round(celsiusTemp);
+    /////
+    feelsLikeTemp = (curFeelsLike - 32) / 1.8;
+    feelsLike = feelsLike.innerHTML = Math.round(feelsLikeTemp);
     units = "metric";
-    // highLowTemp.innerHTML = " 33°C / 37°C ";
+    CorFLet.innerHTML = "°C";
     CorFLet.innerHTML = "°C";
     CorFBut.innerHTML = " [°C] or °F ";
     defaultTemp = "C";
   } else {
     curTemp.innerHTML = Math.round((celsiusTemp * 9) / 5 + 32);
-    // highLowTemp.innerHTML = " 79°F / 82°F ";
+    /////
+    feelsLikeTemp = (curFeelsLike * 9) / 5 + 32;
+    feelsLike = feelsLike.innerHTML = Math.round(feelsLikeTemp);
     units = "imperial";
+    CorFLet.innerHTML = "°F";
     CorFLet.innerHTML = "°F";
     CorFBut.innerHTML = " °C or [°F] ";
     defaultTemp = "F";
