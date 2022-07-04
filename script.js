@@ -110,6 +110,7 @@ function displayCurWeatherCondition(response) {
   //   "src",
   //   `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   // );
+  getForecast(response.data.coord);
 }
 
 // display otherDays weather details
@@ -136,7 +137,8 @@ function displayOthWeatherCondition(response) {
 }
 
 // OTHER DAY FORECAST - Write code once and duplicate in JS
-function displayForecast() {
+function displayForecast(response) {
+  console.log(response.data.daily);
   let forecastElement = document.querySelector("#forecast");
 
   let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
@@ -312,6 +314,17 @@ function showPosition(position) {
   curLocButton.addEventListener("click", getCurrentPosition);
 }
 
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let lat = coordinates.lat;
+  let lon = coordinates.lon;
+  let units = "imperial";
+  let apiKey = `15ed5d92f7b4157fdab57b1053c46052`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(displayForecast);
+}
+
 // calls showPosition
 function getCurrentPosition() {
   navigator.geolocation.getCurrentPosition(showPosition);
@@ -321,5 +334,4 @@ function getCurrentPosition() {
 let curLocButton = document.querySelector("button.currentButton");
 curLocButton.addEventListener("click", getCurrentPosition);
 
-displayForecast();
 otherDaysInRows();
