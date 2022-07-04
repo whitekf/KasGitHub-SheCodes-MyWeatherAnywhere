@@ -405,18 +405,23 @@ h4.city:hover {
   text-decoration: none;
 }
 
-.weather-forecast-sum {
+#forecast {
+  margin-left: 10%;
+}
+
+.weather-forecast {
   margin-top: 22px;
   text-align: center;
-  color: #000;
-  background-color: rgb(212, 207, 234);
-  padding: 5px 5px 5px 5px;
+  align-items: center;
+  color: rgb(37, 6, 59);
+  background-color: rgb(191, 193, 243);
   border-radius: 180px;
+  border: 2px solid rgb(97, 90, 194);
 }
 
 .weather-forecast-day {
-  font-size: 16px;
-  opacity: 0.5;
+  font-size: 20px;
+  opacity: 0.7;
 }
 
 .weather-forecast-temp-max {
@@ -424,11 +429,21 @@ h4.city:hover {
 }
 
 .weather-forecast-temp-min {
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 .weather-forecast-temperatures {
-  font-size: 16px;
+  font-size: 18px;
+}
+
+.otherDaysFor {
+  margin-top: 22px;
+  text-align: center;
+  align-items: center;
+  color: rgb(37, 6, 59);
+  background-color: rgb(212, 207, 234);
+  border-radius: 180px;
+  border: 2px solid rgb(97, 90, 194);
 }
 
 .otherDays {

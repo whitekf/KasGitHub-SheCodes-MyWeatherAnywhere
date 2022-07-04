@@ -131,6 +131,82 @@ function displayOthWeatherCondition(response) {
     Math.round(response.data.wind.speed) + "mph";
   document.querySelector("span.otherDescription").innerHTML =
     response.data.weather[0].description;
+  displayForecast();
+  otherDaysInRows();
+}
+
+// OTHER DAY FORECAST - Write code once and duplicate in JS
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
+
+  let forecastHTML = `<div class="row">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+        <div class="col-2 weather-forecast">
+          <div class="weather-forecast-day">${day}</div>
+          <img
+            src="http://openweathermap.org/img/wn/50d@2x.png"
+            alt=""
+            width="42"
+          />
+          <div class="weather-forecast-temperatures">
+            <span class="weather-forecast-temp-max"> 74 </span>
+            <span> | </span>
+            <span class="weather-forecast-temp-min"> 44 </span>
+          </div>
+        </div>
+      `;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+// rows of days displayed
+function otherDaysInRows() {
+  let otherDaysElement = document.querySelector("#otherDaysFor");
+
+  let days = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tues"];
+  let othDaysForecastHTML = `<div class="row">`;
+  days.forEach(function (day) {
+    othDaysForecastHTML =
+      othDaysForecastHTML +
+      `        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-1 dayOfWeek">${day}</div>
+            <div class="col-8 otherDays align-self-center">
+              <ul>
+                <li class="weatherHeading">
+                  <span class="otherTemp"> X </span
+                  ><span class="CorFLetter" size="100">°F</span>
+                  <span class="otherDescription" size="100%"> Clear sky </span>
+                </li>
+                <li>
+                  Humidity:
+                  <span class="otherHumidity"> X </span>
+                </li>
+                <li>
+                  Wind:
+                  <span class="otherWind" size="100%"> X </span>
+                </li>
+                <li>
+                  High/Low:
+                  <span class="otherHighLow" size="100"> X°F / X°F </span>
+                </li>
+              </ul>
+            </div>
+            <div class="col-1 weatherIcon">
+              <i class="fa-solid fa-cloud-sun align-self-center"></i>
+            </div>
+            <div class="col-1"></div>
+          </div>
+     `;
+  });
+  othDaysForecastHTML = othDaysForecastHTML + `</div>`;
+  otherDaysElement.innerHTML = othDaysForecastHTML;
 }
 
 // Update city based on search input BELOW ------
@@ -244,3 +320,6 @@ function getCurrentPosition() {
 // when user clicks "current location" button
 let curLocButton = document.querySelector("button.currentButton");
 curLocButton.addEventListener("click", getCurrentPosition);
+
+displayForecast();
+otherDaysInRows();
