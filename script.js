@@ -263,11 +263,11 @@ function calcTemp(event) {
   let CorFBut = document.querySelector(".CorF");
   let CorFLet = document.querySelector("span.CorFLetter");
 
-  if (units === "imperial") {
-    units = "metric";
-  } else {
-    units = "imperial";
-  }
+  // if (units === "imperial") {
+  //   units = "metric";
+  // } else {
+  //   units = "imperial";
+  // }
   //cTempMaxCur
   //cTempMinCur
 
