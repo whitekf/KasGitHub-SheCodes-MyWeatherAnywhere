@@ -32,7 +32,7 @@ li {
   font-size: 54px;
   margin-left: 15px;
   padding-left: 5%;
-  padding-top: 3%;
+  padding-top: 1%;
   color: rgb(88, 69, 182);
   font-weight: bold;
 }
@@ -47,7 +47,7 @@ li {
   font-size: 56px;
   margin-left: 15px;
   padding-left: 5%;
-  padding-top: 3%;
+  padding-top: 1%;
   color: rgb(88, 69, 182);
   font-weight: bold;
   transition: ease-in-out;
@@ -300,7 +300,7 @@ li.feelsLike {
 .CorFLetter {
   text-align: left;
   color: white;
-  font-size: 20px;
+  font-size: 24px;
   padding-bottom: 20px;
 }
 

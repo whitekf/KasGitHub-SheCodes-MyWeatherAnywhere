@@ -5,12 +5,14 @@ let units = "imperial";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}`;
 let celsiusTemp = null;
 let fahrenTemp = null;
+let fahrenTempHigh = null;
+let fahrenTempLow = null;
+let celsTempHigh = null;
+let celsTempLow = null;
 let fTempMin = [];
 let fTempMax = [];
 let cTempMin = null;
 let cTempMax = null;
-let weatherTempMax = null;
-let weatherTempMin = null;
 let defaultTemp = "F";
 let CorFBut = document.querySelector(".CorF");
 let CorFLet = document.querySelector("span.CorFLetter");
@@ -89,6 +91,8 @@ if (dateTime) {
 function displayCurWeatherCondition(response) {
   city = response.data.name;
   fahrenTemp = response.data.main.temp;
+  fahrenTempHigh = response.data.main.temp.max;
+  fahrenTempLow = response.data.main.temp.min;
 
   let iconElement = document.querySelector("#currentIcon");
   document.querySelector("h4.city").innerHTML = city;
@@ -101,9 +105,6 @@ function displayCurWeatherCondition(response) {
     response.data.main.humidity + "%";
   document.querySelector("span.currentWind").innerHTML =
     Math.round(response.data.wind.speed) + "mph";
-  document.querySelector("span.highLow").innerHTML =
-    Math.round(response.data.main.temp.min) + "° ";
-  console.log(response.data.current);
 
   let iconData = response.data.weather[0].icon;
 
@@ -143,6 +144,15 @@ function displayForecast(response) {
 
   let forecastHTML = `<div class="row weatherRow">`;
   forecast.forEach(function (forecastDay, index) {
+    if (index < 1) {
+      document.querySelector("span.highLowHigh").innerHTML = Math.round(
+        forecastDay.temp.max
+      );
+      document.querySelector("span.highLowLow").innerHTML = Math.round(
+        forecastDay.temp.min
+      );
+    }
+
     if (index < 5) {
       fTempMin[index] = forecastDay.temp.min;
       console.log(fTempMin[index]);
@@ -222,6 +232,8 @@ formInput.addEventListener("submit", displaySearchedCity);
 function calcTemp(event) {
   let highLowTemp = document.querySelector("span.highLow");
   let curTemp = document.querySelector("span.currentTemp");
+  let curHighTemp = document.querySelector("span.highLowHigh");
+  let curLowTemp = document.querySelector("span.highLowLow");
 
   let CorFBut = document.querySelector(".CorF");
   let CorFLet = document.querySelector("span.CorFLetter");
@@ -235,17 +247,23 @@ function calcTemp(event) {
   if (defaultTemp === "F") {
     celsiusTemp = (fahrenTemp - 32) / 1.8;
     curTemp.innerHTML = Math.round(celsiusTemp);
+    celsTempLow = (fahrenTempLow - 32) / 1.8;
+    curLowTemp.innerHTML = Math.round(celsTempLow);
+    celsTempHigh = (fahrenTempHigh - 32) / 1.8;
+    curHighTemp.innerHTML = Math.round(celsTempHigh);
     units = "metric";
     CorFLet.innerHTML = "°C";
-    FLCorFLetter.innerHTML = "°C";
     CorFBut.innerHTML = " [°C] or °F ";
     defaultTemp = "C";
   } else {
     curTemp.innerHTML = Math.round((celsiusTemp * 9) / 5 + 32);
+    celsTempLow = (fahrenTempLow * 9) / 5 + 32;
+    curLowTemp.innerHTML = Math.round(celsTempLow);
+    celsTempHigh = (fahrenTempHigh * 9) / 5 + 32;
+    curHighTemp.innerHTML = Math.round(celsTempHigh);
     /////
     units = "imperial";
     CorFLet.innerHTML = "°F";
-    FLCorFLetter.innerHTML = "°F";
     CorFBut.innerHTML = " °C or [°F] ";
     defaultTemp = "F";
   }
