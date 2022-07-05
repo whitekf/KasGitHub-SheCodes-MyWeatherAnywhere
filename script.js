@@ -5,12 +5,15 @@ let units = "imperial";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}`;
 let celsiusTemp = null;
 let fahrenTemp = null;
-let fTempMin = null;
-let fTempMax = null;
+let fTempMin = [];
+let fTempMax = [];
 let cTempMin = null;
 let cTempMax = null;
+let weatherTempMax = null;
+let weatherTempMin = null;
 let fTempFL = null;
 let curFeelsLike = null;
+let feelsLikeTemp = null;
 let defaultTemp = "F";
 let CorFBut = document.querySelector(".CorF");
 let CorFLet = document.querySelector("span.CorFLetter");
@@ -74,7 +77,7 @@ function displayDate() {
 
   fullDay.innerHTML = wkDay;
 
-  fullTime.innerHTML = hour + ":" + minutes + ampm + " EST";
+  fullTime.innerHTML = hour + ":" + minutes + ampm;
 }
 
 // on LOAD, the date and time refreshes
@@ -89,10 +92,9 @@ if (dateTime) {
 function displayCurWeatherCondition(response) {
   let city = response.data.name;
   let iconElement = document.querySelector("#currentIcon");
-  curFeelsLike = response.data.main.feels_like;
-
   document.querySelector("h4.city").innerHTML = city;
   fahrenTemp = response.data.main.temp;
+  feelsLikeTemp = response.data.main.feels_like;
   document.querySelector("span.currentTemp").innerHTML = Math.round(fahrenTemp);
   document.querySelector("span.CorFLetter").innerHTML = "°F";
   document.querySelector(".CorF").innerHTML = " °C or [°F] ";
@@ -105,6 +107,7 @@ function displayCurWeatherCondition(response) {
   document.querySelector("span.feelsLikeTemp").innerHTML = Math.round(
     response.data.main.feels_like
   );
+  feelsLikeTemp = response.data.main.feels_like;
   document.querySelector("span.highLow").innerHTML =
     Math.round(response.data.main.temp.min) + "° ";
   console.log(response.data.current);
@@ -115,15 +118,6 @@ function displayCurWeatherCondition(response) {
     "src",
     `http://openweathermap.org/img/wn/${iconData}@2x.png`
   );
-  // iconElement.innerHTML = `http://openweathermap.org/img/wn/${iconData}@2x.png`;
-
-  // let locationIcon = document.querySelector(".weather-icon");
-  // const { icon } = data.weather[0];
-  // locationIcon.innerHTML = `<img src="icons/${icon}.png">`;
-  // iconElement.setAttribute(
-  //   "src",
-  //   `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-  // );
   getForecast(response.data.coord);
 }
 
@@ -149,13 +143,19 @@ function displayForecast(response) {
   let forecast = response.data.daily;
   console.log(forecast);
 
+  let tempToCorF = document.querySelector("button.CorF");
+  tempToCorF.addEventListener("click", calcTemp);
+
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row weatherRow">`;
   forecast.forEach(function (forecastDay, index) {
     if (index < 5) {
-      fTempMin = forecastDay.temp.min;
-      fTempMax = forecastDay.temp.max;
+      fTempMin[index] = forecastDay.temp.min;
+      console.log(fTempMin[index]);
+      fTempMax[index] = forecastDay.temp.max;
+      console.log(fTempMax[index]);
+
       forecastHTML += `
         <div class="col-2 weather-forecast">
           <div class="weather-forecast-day">${formatDay(forecastDay.dt)}</div>
@@ -211,14 +211,14 @@ function displaySearchedCity(event) {
 function searchCurrentCity(position) {
   // KASSIE COME BACK NEED TO FIGURE OUT WHY THIS ISN'T REMOVING TEXT IN SEARCH FIELD
   let searchIn = document.querySelector("#search-text-input");
-  searchIn.value.innerHTML = "";
+  searchIn.value.innerHTML = "Search for a city";
 
   let apiKey = "15ed5d92f7b4157fdab57b1053c46052";
   let units = "imperial";
   // let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}`;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=${units}`;
   axios.get(`${apiUrl}&appid=${apiKey}`).then(displayCurWeatherCondition);
-  axios.get(`${apiUrl}&appid=${apiKey}`).then(displayOthWeatherCondition);
+  // axios.get(`${apiUrl}&appid=${apiKey}`).then(displayOthWeatherCondition);
 }
 
 // Calls display city function when user submits from search bar
@@ -230,10 +230,11 @@ function calcTemp(event) {
   let highLowTemp = document.querySelector("span.highLow");
   let curTemp = document.querySelector("span.currentTemp");
   let feelsLike = document.querySelector("span.feelsLikeTemp");
-  let feelsLikeTemp = curFeelsLike;
 
   let CorFBut = document.querySelector(".CorF");
   let CorFLet = document.querySelector("span.CorFLetter");
+  let FLCorFLetter = document.querySelector("span.FLCorFLetter");
+  FLCorFLetter.innerHTML = "°F";
 
   if (units === "imperial") {
     units = "metric";
@@ -245,21 +246,23 @@ function calcTemp(event) {
     celsiusTemp = (fahrenTemp - 32) / 1.8;
     curTemp.innerHTML = Math.round(celsiusTemp);
     /////
-    feelsLikeTemp = (curFeelsLike - 32) / 1.8;
-    feelsLike = feelsLike.innerHTML = Math.round(feelsLikeTemp);
+    curFeelsLike = (feelsLikeTemp - 32) / 1.8;
+    feelsLikeTemp = curFeelsLike;
+    feelsLike.innerHTML = Math.round(curFeelsLike);
     units = "metric";
     CorFLet.innerHTML = "°C";
-    CorFLet.innerHTML = "°C";
+    FLCorFLetter.innerHTML = "°C";
     CorFBut.innerHTML = " [°C] or °F ";
     defaultTemp = "C";
   } else {
     curTemp.innerHTML = Math.round((celsiusTemp * 9) / 5 + 32);
     /////
-    feelsLikeTemp = (curFeelsLike * 9) / 5 + 32;
-    feelsLike = feelsLike.innerHTML = Math.round(feelsLikeTemp);
+    curFeelsLike = (feelsLikeTemp * 9) / 5 + 32;
+    feelsLikeTemp = curFeelsLike;
+    feelsLike.innerHTML = Math.round(curFeelsLike);
     units = "imperial";
     CorFLet.innerHTML = "°F";
-    CorFLet.innerHTML = "°F";
+    FLCorFLetter.innerHTML = "°F";
     CorFBut.innerHTML = " °C or [°F] ";
     defaultTemp = "F";
   }
@@ -268,6 +271,7 @@ function calcTemp(event) {
     let CorFLet = document.querySelector("span.CorFLetter");
     CorFLet = "F";
   } else {
+    let CorFLet = document.querySelector("span.CorFLetter");
     CorFLet = "C";
   }
 
