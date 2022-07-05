@@ -11,9 +11,6 @@ let cTempMin = null;
 let cTempMax = null;
 let weatherTempMax = null;
 let weatherTempMin = null;
-let fTempFL = null;
-let curFeelsLike = null;
-let feelsLikeTemp = null;
 let defaultTemp = "F";
 let CorFBut = document.querySelector(".CorF");
 let CorFLet = document.querySelector("span.CorFLetter");
@@ -90,11 +87,11 @@ if (dateTime) {
 
 // display current weather details
 function displayCurWeatherCondition(response) {
-  let city = response.data.name;
+  city = response.data.name;
+  fahrenTemp = response.data.main.temp;
+
   let iconElement = document.querySelector("#currentIcon");
   document.querySelector("h4.city").innerHTML = city;
-  fahrenTemp = response.data.main.temp;
-  feelsLikeTemp = response.data.main.feels_like;
   document.querySelector("span.currentTemp").innerHTML = Math.round(fahrenTemp);
   document.querySelector("span.CorFLetter").innerHTML = "°F";
   document.querySelector(".CorF").innerHTML = " °C or [°F] ";
@@ -104,10 +101,6 @@ function displayCurWeatherCondition(response) {
     response.data.main.humidity + "%";
   document.querySelector("span.currentWind").innerHTML =
     Math.round(response.data.wind.speed) + "mph";
-  document.querySelector("span.feelsLikeTemp").innerHTML = Math.round(
-    response.data.main.feels_like
-  );
-  feelsLikeTemp = response.data.main.feels_like;
   document.querySelector("span.highLow").innerHTML =
     Math.round(response.data.main.temp.min) + "° ";
   console.log(response.data.current);
@@ -229,12 +222,9 @@ formInput.addEventListener("submit", displaySearchedCity);
 function calcTemp(event) {
   let highLowTemp = document.querySelector("span.highLow");
   let curTemp = document.querySelector("span.currentTemp");
-  let feelsLike = document.querySelector("span.feelsLikeTemp");
 
   let CorFBut = document.querySelector(".CorF");
   let CorFLet = document.querySelector("span.CorFLetter");
-  let FLCorFLetter = document.querySelector("span.FLCorFLetter");
-  FLCorFLetter.innerHTML = "°F";
 
   if (units === "imperial") {
     units = "metric";
@@ -245,10 +235,6 @@ function calcTemp(event) {
   if (defaultTemp === "F") {
     celsiusTemp = (fahrenTemp - 32) / 1.8;
     curTemp.innerHTML = Math.round(celsiusTemp);
-    /////
-    curFeelsLike = (feelsLikeTemp - 32) / 1.8;
-    feelsLikeTemp = curFeelsLike;
-    feelsLike.innerHTML = Math.round(curFeelsLike);
     units = "metric";
     CorFLet.innerHTML = "°C";
     FLCorFLetter.innerHTML = "°C";
@@ -257,9 +243,6 @@ function calcTemp(event) {
   } else {
     curTemp.innerHTML = Math.round((celsiusTemp * 9) / 5 + 32);
     /////
-    curFeelsLike = (feelsLikeTemp * 9) / 5 + 32;
-    feelsLikeTemp = curFeelsLike;
-    feelsLike.innerHTML = Math.round(curFeelsLike);
     units = "imperial";
     CorFLet.innerHTML = "°F";
     FLCorFLetter.innerHTML = "°F";
