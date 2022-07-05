@@ -97,6 +97,7 @@ function displayCurWeatherCondition(response) {
   fahrenTemp = response.data.main.temp;
   // fahrenTempHigh = response.data.main.temp.max;
   // fahrenTempLow = response.data.main.temp.min;
+  // console.log(fahrenTempHigh + " " + fahrenTempLow);
 
   let iconElement = document.querySelector("#currentIcon");
   document.querySelector("h4.city").innerHTML = city;
@@ -146,26 +147,41 @@ function displayForecast(response) {
 
   let forecastElement = document.querySelector("#forecast");
 
+  ///////
+  // KASSIE COME BACK HERE!
+  // fTempMaxCur = response.temp.max;
+  // document.querySelector("span.highLowHigh").innerHTML =
+  //   Math.round(fTempMaxCur);
+  // fTempMinCur = forecastDay.temp.min;
+  // document.querySelector("span.highLowLow").innerHTML = Math.round(fTempMinCur);
+  // cTempMaxCur = (fTempMaxCur - 32) / 1.8;
+  // cTempMinCur = (fTempMinCur - 32) / 1.8;
+  // ////////
+
   let forecastHTML = `<div class="row weatherRow">`;
   forecast.forEach(function (forecastDay, index) {
-    if (index < 1) {
-      fTempMaxCur = forecastDay.temp.max;
-      document.querySelector("span.highLowHigh").innerHTML = Math.round(
-        forecastDay.temp.max
-      );
-      fTempMinCur = forecastDay.temp.min;
-      document.querySelector("span.highLowLow").innerHTML = Math.round(
-        forecastDay.temp.min
-      );
-      cTempMaxCur = (fTempMaxCur - 32) / 1.8;
-      cTempMinCur = (fTempMinCur - 32) / 1.8;
-      ////////
-    }
+    // if (index < 1) {
+    //   fTempMaxCur = forecastDay.temp.max;
+    //   document.querySelector("span.highLowHigh").innerHTML = Math.round(
+    //     forecastDay.temp.max
+    //   );
+    //   fTempMinCur = forecastDay.temp.min;
+    //   document.querySelector("span.highLowLow").innerHTML = Math.round(
+    //     forecastDay.temp.min
+    //   );
+    //   cTempMaxCur = (fTempMaxCur - 32) / 1.8;
+    //   cTempMinCur = (fTempMinCur - 32) / 1.8;
+    //   ////////
+    // }
     if (index < 5) {
       fTempMin[index] = forecastDay.temp.min;
       console.log(fTempMin[index]);
       fTempMax[index] = forecastDay.temp.max;
       console.log(fTempMax[index]);
+      ////////
+      cTempMaxCur = (fTempMax[index] - 32) / 1.8;
+      cTempMinCur = (fTempMin[index] - 32) / 1.8;
+      ////////
 
       forecastHTML += `
         <div class="col-2 weather-forecast">
@@ -258,25 +274,18 @@ function calcTemp(event) {
   if (defaultTemp === "F") {
     celsiusTemp = (fahrenTemp - 32) / 1.8;
     curTemp.innerHTML = Math.round(celsiusTemp);
-    // celsTempLow = (fTempMinCur - 32) / 1.8;
-    // curLowTemp.innerHTML = Math.round(celsTempLow);
-    // celsTempHigh = (fTempMaxCur - 32) / 1.8;
-    // curHighTemp.innerHTML = Math.round(celsTempHigh);
-    curLowTemp.innerHTML = Math.round(cTempMinCur);
-    curHighTemp.innerHTML = Math.round(cTempMaxCur);
+    /////
+    // curLowTemp.innerHTML = Math.round(cTempMinCur);
+    // curHighTemp.innerHTML = Math.round(cTempMaxCur);
     units = "metric";
     CorFLet.innerHTML = "°C";
     CorFBut.innerHTML = " [°C] or °F ";
     defaultTemp = "C";
   } else {
     curTemp.innerHTML = Math.round((celsiusTemp * 9) / 5 + 32);
-    // celsTempLow = (fTempMinCur * 9) / 5 + 32;
-    // curLowTemp.innerHTML = Math.round(celsTempLow);
-    // celsTempHigh = (fTempMaxCur * 9) / 5 + 32;
-    // curHighTemp.innerHTML = Math.round(celsTempHigh);
-    /////
-    curLowTemp.innerHTML = Math.round(fTempMinCur);
-    curHighTemp.innerHTML = Math.round(fTempMaxCur);
+    // /////
+    // curLowTemp.innerHTML = Math.round(fTempMinCur);
+    // curHighTemp.innerHTML = Math.round(fTempMaxCur);
     units = "imperial";
     CorFLet.innerHTML = "°F";
     CorFBut.innerHTML = " °C or [°F] ";
